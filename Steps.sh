@@ -1,0 +1,15 @@
+gcloud container clusters get-credentials standard-cluster-1 --zone us-west2-c --project boreal-logic-244405;
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash;
+kubectl --namespace kube-system create sa tiller;
+kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller;
+helm init --service-account tiller;
+helm repo update;
+kubectl create -f zoo.yaml;
+kubectl create -f zoos.yaml;
+kubectl create -f kafs.yaml;
+kubectl get service kafka-service;
+kubectl describe  service kafka-service;
+kubectl get service kafka-service;
+kubectl create -f kaf.yaml;
+sudo apt-get install kafkacat;
+kafkacat -b 34.94.217.99:9092 -t topic1;
